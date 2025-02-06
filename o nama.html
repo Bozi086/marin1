@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nama</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Opcije navigacionog bara */
+        nav .navbar-nav .nav-item {
+            position: relative;
+        }
+
+        nav .navbar-nav .nav-item .dropdown-menu {
+            background-color: #008080; /* ZELENA boja */
+        }
+
+        nav .navbar-nav .nav-item .dropdown-menu a {
+            color: white; /* Beli tekst za stavke padajućeg menija */
+        }
+
+        nav .navbar-nav .nav-item:hover > a,
+        nav .navbar-nav .nav-item .dropdown-menu a:hover {
+            background-color: #ff7f50;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        /*linija zelena*/
+        .thin-line {
+            width: 100%;
+            height: 3px; /* Podesite debljinu linije prema potrebi */
+            background-color: #008080; /* Boja linije, ZELENA */
+            margin: 20px 0; /* Razmak iznad i ispod linije */
+        }
+
+        /* Prilagođeni stilovi navigacionog bara */
+        .navbar {
+            background-color: #008080; /* ZELENA boja */
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Beli tekst za stavke navigacije */
+            padding: 0.5rem 1rem; /* Dodatni prostor za bolje ciljanje na mobilnim uređajima */
+            border-radius: 10px; /* Zaobljene ivice */
+            margin: 0 5px; /* Razmak između stavki navigacije */
+        }
+
+        .navbar .navbar-nav .nav-link:hover,
+        .navbar .navbar-nav .nav-link:focus,
+        .navbar .navbar-nav .nav-link.hover {
+            background-color: #ff7f50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar .navbar-brand {
+            color: white !important; /* Beli tekst za naziv brenda */
+        }
+
+        @media (hover: none) {
+            /* Stilovi koji se primenjuju kada hover nije podržan */
+            .navbar .navbar-nav .nav-link:hover {
+                /* Hover efekti nisu podržani na touch uređajima */
+            }
+            
+            .navbar .navbar-nav .nav-link:active {
+                /* Stilovi za aktivno stanje na mobilnim uređajima */
+                background-color: #ff7f50;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s;
+            }
+        }
+
+
+        .content-wrapper {
+    border: 2px solid #008080; /* Zeleni okvir */
+    border-radius: 15px; /* Zakrivljenje ivica */
+    padding: 20px; /* Unutrašnji razmak */
+    margin: 20px 0; /* Gornji i donji razmak */
+    box-sizing: border-box; /* Da padding ne utiče na ukupnu širinu */
+    background-color: #f8f9fa; /* Svetla pozadinska boja */
+}
+
+
+        h2 {
+            font-size: 36px;
+            color: #008080; /* veličina fonta i boja za naslove */
+        }
+
+        .center-bottom {
+            width: 380px; 
+            height: auto; 
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+            border: 2px solid #ff7f50;
+        }
+
+        main {
+            padding: 2em;
+            flex: 1;
+        }
+
+        footer {
+            background-color: #008080;
+            color: white;
+            text-align: center;
+            padding: 5.5em 0;
+            width: 100%;
+        }
+
+          #backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: 2px solid #ff7f50; /* Narandžasti okvir */
+    outline: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px; /* Zakrivljene ivice */
+    width: 50px;
+    height: 50px;
+    line-height: 20px;
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.4s;
+}
+
+#backToTop:hover {
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="zeleni_logo1.jpg" alt="Marin Med Montenegro" class="d-inline-block align-top" style="max-height: 69px; border: 2px solid #ff7f50; border-radius: 5px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="o nama.html">O nama</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="webDevelopmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usluge
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="webDevelopmentDropdown">
+                            <li><a class="dropdown-item" href="opsta medicina.html">Opsta Medicina</a></li>
+                            <li><a class="dropdown-item" href="hirurgija.html">Hirurgija</a></li>
+                            <li><a class="dropdown-item" href="specijalisticki pregledi.html">Specijalisticki pregledi</a></li>
+                            <li><a class="dropdown-item" href="ginekologija.html">Ginekologija</a></li>
+                            <li><a class="dropdown-item" href="njega i pomoc.html">Njega i pomoc</a></li>
+                            <li><a class="dropdown-item" href="neurologija.html">Neurologija</a></li>
+                            <li><a class="dropdown-item" href="pedijatrija.html">Pedijatrija</a></li>
+                            <li><a class="dropdown-item" href="dijagnostika.html">Dijagnostika</a></li>
+                            <li><a class="dropdown-item" href="infektologija i alergologija.html">Infektologija i Alergologija</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galerija.html">Galerija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakti.html">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <button id="backToTop" title="Back to Top">^</button>
+
+    <main>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h2>O nama</h2>
+
+                  <div class="content-wrapper">
+    <div style="height: 45px;"></div>
+    <p><b>Marin Med Montenegro</b> je provajder ili posrednik medicinskih usluga, sa sjedištem u <b>Kliničko-bolničkom centru u Kotoru</b>, koji je osnovan sa ciljem da obezbijedi medicinske usluge <b>stranim turistima</b>, prije svega onima koji dolaze posredstvom najvećih <b>svjetskih kruzing kompanija</b>.</p>
+
+    <p>Razvili smo jedinstven pristup pružanja medicinske pomoći i nudimo širok spektar medicinskih usluga svojim klijentima.
+
+    Naši saradnici su najveća osiguravajuća društva na svijetu i u regionu, koja su priznala našu izvrsnost u liječenju svojih osiguranika.<br>
+
+    <p><b>Marin Med Montenegro</b> je sestra kompanija <b>Poliklinici Marin Med iz Dubrovnika</b>, koja se nalazi u Hrvatskoj, a ima dugu tradiciju pružanja medicinske zdravstvene zaštite prve klase za sve turiste Dubrovnika, posebno putnike i posadu velikih svjetskih kruzera.<br>
+
+    Naše bogato iskustvo u Dubrovniku dovelo je do odluke da započnemo poslovanje i u <b>Crnoj Gori</b>, te i saradnji sa tadašnjom Opštom bolnicom, a sadašnjim Kliničko-bolničkim centrom koji se nalazi u <b>Kotoru</b>, gradu pod zaštitom <b>UNESCO-a.</b><br>
+
+    Vrijedi spomenuti da <b>Poliklinika Marin Med</b> raspolaže savremeno opremljenim objektom koji se nalazi na samo 60 minuta udaljenosti od naše kancelarije u <b>Kotoru</b>.</p>
+
+    <p>Ukoliko želite da nas kontaktirate, sve što treba jeste da pozovete naš broj koji je dostupan <b>24/7</b> i naše ljubazno osoblje ce vam za kratki vremenski priod organizovati pregled doktora specijaliste.</p>
+
+    <p><b>Osoblje Marin Med Montenegra služi se stranim jezicima i zadovoljava najviše kriterijume u komunikaciji sa klijentima.</b></p>
+</div>
+
+            </div>
+        </div>
+    </main>
+
+    <img src="vizit karta2.jpg" alt="Opis slike" class="center-bottom">
+
+    <footer>
+        <img src="zeleni_logo1.jpg" alt="Opis slike" width="180" height="70" style="border: 2px solid #ff7f50; border-radius: 5px;">
+        <div style="height: 30px;"></div>
+        <h4>MARIN-MED-MNE</h4>
+        <p>info@marin-med-mne.com</p>
+        <p>+38267417417</p>
+        <p style="color: #000000;">© 2025 cryptogorac.com</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+
+            // Prikaz dugmeta kada se skroluje dole
+            window.onscroll = function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            };
+
+                      // Funkcionalnost dugmeta za povratak na vrh
+    backToTopButton.addEventListener('click', function() {
+        document.body.scrollTop = 0; // Za Safari
+        document.documentElement.scrollTop = 0; // Za Chrome, Firefox, IE i Opera
+    });
+});
+
+            // Hover efekat za mobilne uređaje
+            var touchStartEvent = 'touchstart';
+            var touchEndEvent = 'touchend';
+
+            function addHoverClass(el) {
+                el.classList.add('hover');
+            }
+
+            function removeHoverClass(el) {
+                el.classList.remove('hover');
+            }
+
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(function(el) {
+                el.addEventListener(touchStartEvent, function(e) {
+                    addHoverClass(this);
+                });
+
+                el.addEventListener(touchEndEvent, function() {
+                    setTimeout(function() {
+                        removeHoverClass(this);
+                    }.bind(this), 500); // 500ms delay
+                });
+            });
+        
+    </script>
+</body>
+</html>

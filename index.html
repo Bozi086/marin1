@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marin-med-mne.com</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+
+/* navigacionog bara */
+nav .navbar-nav .nav-item {
+    position: relative;
+}
+
+nav .navbar-nav .nav-item .dropdown-menu {
+    background-color: #008080; /* ZELENA boja */
+}
+
+nav .navbar-nav .nav-item .dropdown-menu a {
+    color: white; /* Beli tekst za stavke padajućeg menija */
+}
+
+nav .navbar-nav .nav-item:hover > a,
+nav .navbar-nav .nav-item .dropdown-menu a:hover {
+    background-color: #ff7f50;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+/* Prilagođeni stilovi navigacionog bara */
+.navbar {
+    background-color: #008080; /* ZELENA boja */
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white !important; /* Beli tekst za stavke navigacije */
+    padding: 0.5rem 1rem; /* Dodatni prostor za bolje ciljanje na mobilnim uređajima */
+    border-radius: 10px; /* Zaobljene ivice */
+    margin: 0 5px; /* Razmak između stavki navigacije */
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus,
+.navbar .navbar-nav .nav-link.hover {
+    background-color: #ff7f50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar .navbar-brand {
+    color: white !important; /* Beli tekst za naziv brenda */
+}
+
+
+
+@media (hover: none) {
+    /* Stilovi koji se primenjuju kada hover nije podržan */
+    .navbar .navbar-nav .nav-link:hover {
+        /* Hover efekti nisu podržani na touch uređajima */
+    }
+    
+    .navbar .navbar-nav .nav-link:active {
+        /* Stilovi za aktivno stanje na mobilnim uređajima */
+        background-color: #ff7f50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+       transition: all 0.4s 
+    }
+}
+
+       .thin-line {
+    width: 100%;        /* Linija prelazi preko cijele širine roditeljskog elementa */
+    height: 2px;        /* Debljina linije */
+    background-color: #008080; /* Zelena boja */
+    margin: 0;          /* Bez margina */
+    border: none;       /* Bez ivice */
+}
+
+       
+
+.carousel-container {
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+    position: relative; /* Relativno pozicioniranje za apsolutno pozicioniranje naslednika */
+    height: 700px; /* Fiksna visina da bi karusel zauzimao konstantan prostor */
+    overflow: hidden; /* Skriva sadržaj koji prelazi preko ivica */
+}
+
+#carouselExample {
+    height: 100%; /* Da karusel ispuni kontejner */
+}
+
+.carousel-inner {
+    height: 100%; /* Da sve stavke karusela imaju istu visinu */
+}
+
+.carousel-item {
+    position: absolute; /* Apsolutno pozicioniranje za animaciju */
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Prelaženje između slika */
+    transform: scale(0.9); /* Smanjenje slike za efekat */
+    backface-visibility: hidden; /* Da spriječimo čudne efekte pri animaciji */
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: scale(0.9); /* Smanjenje slike za 10% uz aktivaciju */
+    z-index: 2; /* Da se aktivna slika prikaže ispred drugih */
+}
+
+.carousel-item.active ~ .carousel-item {
+    transform: scale(0.81); /* Dodatno smanjenje slika koje nisu aktivne */
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    max-height: 730px;
+    object-fit: contain;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    height: 100%; /* Da kontrole zauzimaju celu visinu karusela */
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+/* Prilagodba za mobilne uređaje */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 300px; /* Manja visina za mobilne uređaje */
+    }
+    
+    .carousel-item img {
+        transform: scale(0.81); /* Dodatno smanjenje vizuelne veličine za mobilne uređaje */
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%;
+    }
+}
+
+/* Prilagodba za mobilne uređaje */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 300px; /* Manja visina za mobilne uređaje */
+    }
+    
+    .carousel-item img {
+        transform: scale(0.8); /* Smanjujemo vizuelnu veličinu slika za 20% */
+        transform-origin: center; /* Smanjujemo iz centra */
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 10%;
+    }
+}
+
+
+
+/* Media query za mobilne uređaje */
+@media (max-width: 600px) {
+    .carousel-inner img {
+        width: 100%; 
+        height: auto; 
+        max-height: 300px; 
+        /* Prilagođavamo 3D efekte za mobilne uređaje */
+        transform: perspective(400px) rotateY(0deg) translateZ(0);
+    }
+    
+    .carousel-inner img:hover {
+        transform: perspective(400px) rotateY(0deg) translateZ(25px) scale(1.14);
+    }
+}
+
+ /* ikonice za usluge */
+.responsive-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 850px;
+    height: auto;
+}
+
+.icon-img {
+    max-width: 80px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.icon-img:hover {
+    transform: scale(1.5);
+}
+
+.icon-section a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.icon-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.icon-item {
+    text-align: center;
+    padding: 10px; /* Dodajemo padding za bolju vidljivost na mobilnim uređajima */
+}
+
+.icon-item h5 {
+    font-size: 1.1em;
+    color: #008080;
+    margin-bottom: 0.5em;
+    text-align: center;
+}
+
+.icon-item p {
+    font-size: 0.9em;
+    color: #008080;
+    text-align: center;
+    margin-top: 0;
+    line-height: 1.4;
+}
+
+
+/* Prilagodba za mobilne uređaje */
+@media (max-width: 767px) {
+    .icon-grid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 10px;
+    }
+    
+    .icon-img {
+        max-width: 90px; /* Velicina ikonica za mobilne uređaje */
+    }
+    
+    .icon-item {
+        padding: 5px; /* Smanjujemo padding za mobilne uređaje */
+    }
+    
+    .icon-item h5 {
+        font-size: 0.8em;
+        margin: 5px 0; /*  bolje razdvajanje elemenata */
+    }
+    
+    .icon-item p {
+        font-size: 0.8em;
+        line-height: 1.2;
+        margin: 0; /* Uklanjamo marginu */
+    }
+}
+
+
+
+/* Stilizacija za tekst ticker */
+.text-ticker {
+    position: relative;
+    overflow: hidden;
+    height: 140px; /* ili po vašoj potrebi */
+    background-color: #008080;
+    border: 1px solid #ffffff;
+}
+
+.text-ticker-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.text-ticker-content span {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin: 0 40px;
+    padding-top: 10px;
+    opacity: 0; /* Počinje sa nevidljivim */
+}
+
+/* Animacija za svaki span */
+.text-ticker-content span:nth-child(1) {
+    animation: fadeInOut 4s infinite 0s;
+}
+
+.text-ticker-content span:nth-child(2) {
+    animation: fadeInOut 4s infinite 2s; /* 2 sekunde kasnije */
+}
+
+.text-ticker-content span:nth-child(3) {
+    animation: fadeInOut 4s infinite 4s; /* 4 sekunde kasnije */
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Prilagodba za mobilne uređaje */
+@media (max-width: 768px) {
+    /* Ovde prilagodjavamo samo visinu trake, ali zadržavamo horizontalni raspored */
+    .text-ticker {
+        height: auto; /* Auto visina da se prilagodi sadržaju */
+        min-height: 100px; /* Minimalna visina za manje ekrane */
+    }
+    
+    /* Smanjujemo font-size ako je potrebno, ali zadržavamo horizontalni raspored */
+    .text-ticker-content span {
+        font-size: 2rem; /* Smanjena veličina za mobilne, ali i dalje velika */
+    }
+    
+    /* Prilagodimo margin ako je potrebno */
+    .text-ticker-content {
+        flex-wrap: wrap; /* Omogućava prelamanje elemenata ako nema dovoljno prostora */
+    }
+    
+    .text-ticker-content span {
+        margin: 0 15px; /*  margin za mobilne uređaje */
+    }
+    
+    /* Ako je potrebno, omogući scrollovanje unutar trake */
+    .text-ticker-content {
+        overflow-x: auto; /* Scrollovanje po horizontali ako je potrebno */
+    }
+}
+/* Stilizacija za slike ticker */
+.image-ticker {
+    position: relative;
+    overflow: hidden;
+    height: 150px; /* ili po vašoj potrebi */
+    background-color: white;
+    border: 1px solid #ffffff;
+}
+
+.image-ticker-content {
+    display: flex;
+    animation: moveImages 12s linear infinite;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-ticker-content img {
+    height: 150px;
+    width: 350px;
+    padding: 0 70px;
+    object-fit: contain;
+}
+
+@keyframes moveImages {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+      #backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: 2px solid #ff7f50; /* Narandžasti okvir */
+    outline: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px; /* Zakrivljene ivice */
+    width: 50px;
+    height: 50px;
+    line-height: 20px;
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.4s;
+}
+
+#backToTop:hover {
+    opacity: 1;
+}
+
+
+.centered-text1 {
+    width: 50%; /* Širina na desktopu */
+}
+
+/* Media query za mobilne uređaje */
+@media (max-width: 767px) {
+    .centered-text1 {
+        width: 100%; /* Širina na mobilnim uređajima */
+        font-size: 17px; /* Manja veličina fonta za bolju čitljivost na malim ekranima */
+    }
+}
+
+
+
+       .map-container {
+        position: relative;
+        overflow: hidden;
+        /* 65% od 56.25% (16:9 ratio) je približno 36.5625% */
+        padding-bottom: 36.5625%; 
+        height: 0;
+    }
+
+     .map-container {
+            position: relative;
+            overflow: hidden;
+            /* Bootstrap koristi 16:9 za embedded sadržaj, ali koristimo 4:3 za mapu što je često uobičajeno */
+            padding-bottom: 75%; 
+            height: 0;
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Ako želite da mapa bude fiksne visine na većim ekranima */
+        @media (min-width: 768px) {
+            .map-container {
+                height: 400px; /* Fiksna visina za tablete i veće ekrane */
+                padding-bottom: 0; /* Isključujemo dinamički padding */
+            }
+        }
+
+    /* Prilagodjavanje za veće ekrane */
+    @media (min-width: 1024px) {
+        .map-container {
+            height: 500px; /* Default visina za veće ekrane */
+        }
+    }
+
+       .call-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #ff7f50;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+            margin: 20px auto; /* Centriranje dugmeta horizontalno i dodavanje prostora iznad */
+            border: 2px solid #008080;
+        }
+
+        .call-button:hover {
+            background-color: #008080;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+.center-container {
+    width: 95%; /* kontejner zauzima celu širinu */
+}
+
+.medical-symbol {
+    width: 150px; /* širine */
+    height: 145px; /* visine */
+    display: block; /* Omogućava da se margin: auto primeni na sliku */
+    margin-left: auto; /* Automatski margin za levu stranu */
+    margin-right: auto; /* Automatski margin za desnu stranu */
+}
+
+.slogan-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.slogan-part-one, .slogan-part-two {
+    width: 50%;
+    text-align: center;
+    border: 5px solid #ff7f50; /* Narandžasta boja okvira */
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    border-radius: 10px; /* Zaobljenje ivica */
+    font-family: Arial, sans-serif; /* Standardni sans-serif font */
+    font-style: normal; /* Normalan stil fonta */
+    font-weight: normal; /* Normalna težina */
+    text-transform: none; /* Bez transformacije velikih slova */
+    letter-spacing: normal; /* Normalni razmak između slova */
+    color: #008080; /* Tamno siva boja teksta */
+}
+
+.slogan-part-one {
+    margin-right: 10px; /* Dodajemo razmak između dva okvira na desktopu */
+}
+
+.slogan-part-one p, .slogan-part-two p {
+    margin: 0px;
+    font-style: italic; /* Normalan stil fonta */
+    font-family: Arial, sans-serif; /* Standardni sans-serif font */
+}
+
+/* Media query za mobilne uređaje */
+@media (max-width: 767px) { /* Širina ekrana za mobilne uređaje, prilagodite po potrebi */
+    .slogan-container {
+        flex-direction: column; /* Promjena smjera fleksa na vertikalni */
+    }
+
+    .slogan-part-one, .slogan-part-two {
+        width: 100%; /* Svaki element zauzima cijelu širinu */
+    }
+
+    .slogan-part-one {
+        margin-right: 0; /* Uklanjamo desnu marginu kada su okviri vertikalno postavljeni */
+        margin-bottom: 10px; /* Dodajemo donju marginu za razmak između okvira na mobilnim uređajima */
+    }
+
+    .slogan-part-one, .slogan-part-two {
+        border-radius: 10px; /* Ovo može biti isto ili drugačije od desktopa, prilagodite prema potrebi */
+    }
+
+    .slogan-part-one p, .slogan-part-two p {
+        text-align: center; /* Ponovno centriranje teksta unutar okvira */
+        font-style: italic; /* Normalan stil fonta */
+        font-family: Arial, sans-serif; /* Standardni sans-serif font */
+    } 
+}
+
+          .marin-med-info {
+    color: #008080;
+    font-style: italic;
+    font-size: 23px;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    border: 3px solid #008080; /* Zeleni okvir */
+    border-radius: 10px; /* Zaobljenje ivica */
+    padding: 10px; /* Unutrašnji prostor za tekst */
+    box-sizing: border-box; /* Da padding ne utiče na ukupnu širinu */
+}
+
+/* Dodatna prilagodba za mobilne uređaje */
+@media (max-width: 767px) {
+    .marin-med-info {
+        width: 100%; /* Da zauzima celu širinu na malim ekranima */
+        font-size: 18px; /* Manja veličina fonta za bolju čitljivost */
+    }
+}
+     main {
+            padding: 2em;
+            flex: 1;
+        }
+
+        footer {
+            background-color: #008080;
+            color: white;
+            text-align: center;
+            padding: 5.5em 0;
+            width: 100%;
+        }
+    
+        
+    </style>
+</head>
+<body>
+   
+   <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="zeleni_logo1.jpg" alt="Marin Med Montenegro" class="d-inline-block align-top" style="max-height: 69px; border: 2px solid #ff7f50; border-radius: 5px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="o nama.html">O nama</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="webDevelopmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usluge
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="webDevelopmentDropdown">
+                            <li><a class="dropdown-item" href="opsta medicina.html">Opšta Medicina</a></li>
+                            <li><a class="dropdown-item" href="hirurgija.html">Hirurgija</a></li>
+                            <li><a class="dropdown-item" href="specijalisticki pregledi.html">Specijalistički pregledi</a></li>
+                            <li><a class="dropdown-item" href="ginekologija.html">Ginekologija</a></li>
+                            <li><a class="dropdown-item" href="njega i pomoc.html">Njega i pomoć</a></li>
+                            <li><a class="dropdown-item" href="neurologija.html">Neurologija</a></li>
+                            <li><a class="dropdown-item" href="pedijatrija.html">Pedijatrija</a></li>
+                            <li><a class="dropdown-item" href="dijagnostika.html">Dijagnostika</a></li>
+                            <li><a class="dropdown-item" href="infektologija i alergologija.html">Infektologija i Alergologija</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galerija.html">Galerija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontakti.html">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <button id="backToTop" title="Back to Top">^</button>
+
+
+
+    <main>
+
+        <h1 style="font-family: cursive; color: #008080; text-align: center;"><b>Zdravlje je naš fokus</b></h1>
+         
+        <div class="carousel-container">
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="carusel1.jpg" class="d-block" alt="Image 1">
+            </div>
+
+             <div class="carousel-item">
+                <img src="bolnica_ko.jpg" class="d-block" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="carusel.sl3.jpg" class="d-block" alt="Image 3">
+            </div>
+           
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+        
+   
+
+       
+<div style="height: 5px;"></div>
+
+
+<h1 style= "cursive; color: #008080; text-align: center;"><b>Marin Med Montenegro</b></h1>
+
+        
+        <div style="height: 25px;"></div>
+
+  
+   <p class="marin-med-info centered-text">
+    <b>Marin Med Montenegro</b> je provajder ili posrednik medicinskih usluga, osnovan u <b>Kotoru</b> sa ciljem da obezbijedi medicinske usluge stranim turistima, prije svega onima koji dolaze posredstvom najvećih <b>svjetskih kruzing kompanija</b>.<br>
+    Razvili smo jedinstven pristup pružanja <b>medicinske pomoći</b> i nudimo širok spektar medicinskih usluga svojim klijentima.
+</p>
+
+      
+
+
+
+<div style="height: 50px;"></div>
+
+<h4 class="centered-text" style="color: #ff7f50; font-style: italic; font-size: 30px; text-align: center; font-weight: bold; text-shadow: 0 0 5px #ADD8E6;"><b>Specijalnosti i Usluge</b></h4>
+
+
+<div style="height: 55px;"></div>
+
+
+        <div class="icon-section">
+            <div class="icon-grid">
+                <!-- Prvi red -->
+                <div class="icon-item">
+                    <a href="opsta medicina.html">
+                        <img src="OPSTA MEDICINA.png" alt="Medicine Icon 1" class="icon-img">
+                      <br>  <h5>OPŠTA MEDICINA</h5>
+                        <p>Interna medicina, kardiologija, endokrinologija, gastroenterologija, urologija </p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="hirurgija.html">
+                        <img src="hirurgija1.png" alt="Medicine Icon 2" class="icon-img">
+                       <br> <h5>HIRURGIJA</h5>
+                        <p>Opšta hirurgija, neurohirurgija,  ortopedija.</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="specijalisticki pregledi.html">
+                        <img src="specijalisticki preg.png" alt="Medicine Icon 3" class="icon-img">
+                        <br><h5>SPECIJALISTIČKI<br> PREGLEDI</h5>
+                        <p>Dermatologija, otorinolaringologija, oftamologija, anestezijologija i reanimacija.</p>
+                    </a>
+                </div>
+                <!-- Drugi red -->
+                <div class="icon-item">
+                    <a href="ginekologija.html">
+                        <img src="GINEKOLOGIJA I AKUSERSTVO.png" alt="ginekologija" class="icon-img">
+                       <br> <h5>GINEKOLOGIJA</h5>
+                        <p>Ginekologija i akušerštvo</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="njega i pomoc.html">
+                        <img src="NJEGA1.png" alt="Medicine Icon 5" class="icon-img">
+                       <br> <h5>NJEGA I POMOĆ</h5>
+                        <p>Fizikalne terapije, dijaliza</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="neurologija.html">
+                        <img src="NEUROLOG.png" alt="Medicine Icon 6" class="icon-img">
+                       <br> <h5>NEUROLOGIJA</h5>
+                        <p>Neurološki pregledi</p>
+                    </a>
+                </div>
+                <!-- Treći red -->
+                <div class="icon-item">
+                    <a href="pedijatrija.html">
+                        <img src="pedijatrija1.png" alt="Medicine Icon 7" class="icon-img">
+                       <br> <h5>PEDIJATRIJA</h5>
+                        <p>Pedijatrija</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="dijagnostika.html">
+                        <img src="DIJAGNOSTIKA1.png" alt="Medicine Icon 8" class="icon-img">
+                        <br><h5>DIJAGNOSTIKA</h5>
+                        <p>Radiologija</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="infektologija i alergologija.html">
+                        <img src="INFEKTOLOGIJA I ALERGOLOGIJA.png" alt="Medicine Icon 9" class="icon-img">
+                       <br> <h5>INFEKTOLOGIJA<br>ALERGOLOGIJA</h5>
+                        <p>Infektologija, alergologija</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<div style="height: 45px;"></div>
+
+       <div class="thin-line"></div>
+
+         <div style="height: 8px;"></div>
+
+<div class="text-ticker">
+    <div class="text-ticker-content">
+        <span>GODINE ISKUSTVA</span>
+         
+        <span>MARIN-MED-MNE</span>
+          <span>HILJADE KORISNIKA</span>
+
+    </div>
+</div>
+ <div style="height: 8px;"></div>
+ <div class="thin-line"></div>
+
+ <div style="height: 70px;"></div>
+
+
+<img src="apoteka simbol.png" alt="MARIN MED-LOG" class="medical-symbol">
+
+
+
+<div style="height: 80px;"></div>
+
+
+         
+    
+<div class="slogan-container">
+    <div class="slogan-part-one">
+        <p class="slogan-text"><b>Marin Med Montenegro</b> je sestra kompanija <b>Poliklinici Marin Med iz Dubrovnika</b>, koja se nalazi u Hrvatskoj, a ima dugu tradiciju pružanja medicinske zdravstvene zaštite prve klase za sve turiste Dubrovnika, posebno putnike i posadu velikih svjetskih kruzera.
+        Naše bogato iskustvo u Dubrovniku dovelo je do odluke da započnemo poslovanje i u <b>Crnoj Gori</b>, te i saradnji sa tadašnjom Opštom bolnicom, a sadašnjim <b>Kliničko-bolničkim centrom koji se nalazi u Kotoru</b>, gradu pod zaštitom <b>UNESCO-a</b>.
+        </p>
+    </div>
+    <div class="slogan-part-two">
+        <p class="slogan-text">Vrijedi spomenuti da <b>Poliklinika Marin Med</b> raspolaže savremeno opremljenim objektom koji se nalazi na samo 60 minuta udaljenosti od naše kancelarije u Kotoru.
+        . Ukoliko želite da nas kontaktirate, sve što treba jeste da pozovete naš broj koji je dostupan <b>24/7</b> i naše ljubazno osoblje ce vam za kratki vremenski priod organizovati pregled doktora specijaliste.
+        Osoblje <b>Marin Med Montenegra</b> služi se stranim jezicima i zadovoljava najviše kriterijume u komunikaciji sa klijentima.</p>
+    </div>
+</div>
+
+
+
+       <div style="height: 55px;"></div>
+        <h4 class="centered-text" style="color: #ff7f50; font-style: italic; font-size: 40px; text-align: center; font-weight: bold; text-shadow: 0 0 5px #ADD8E6;">KONTAKTIRAJTE NAS</h4>
+
+ <div class="button-container">
+        <a href="tel:+38267417417" class="call-button">24/7 Pozovi odmah +38267417417  </a>
+    </div>
+
+    <div style="height: 45px;"></div>
+
+    <div class="thin-line"></div>
+
+<div style="height: 100px;"></div>
+
+<img src="rklama_naslovna.jpg" alt="MARIN MED-LOG" class="responsive-img">
+
+<div style="height: 100px;"></div>
+<h4 class="centered-text" style="color: #ff7f50; font-style: italic; font-size: 28px; text-align: center; font-weight: bold; text-shadow: 0 0 5px #ADD8E6;">SARADNJE NA KOJE SMO PONOSNI</h4>
+
+<div style="height: 45px;"></div>
+
+ <div class="image-ticker">
+    <div class="image-ticker-content">
+
+         <a href="https://www.marin-med.com" target="_blank">
+            <img src="logo-novi2.png" alt="Slika 5">
+        </a>
+
+        <a href="https://www.adriaticagent.com" target="_blank">
+            <img src="boka-logo1.png" alt="Slika 5">
+        </a>
+
+        <a href="https://www.savitar-gr.com" target="_blank">
+            <img src="savitar-group.jpg" alt="Slika 5">
+        </a>
+
+        <a href="https://www.ap-companies.com" target="_blank">
+            <img src="ap-medi.png" alt="Slika 5">
+        </a>
+
+        <a href="https://www.allegrakrstarenja.com" target="_blank">
+            <img src="alegra.jpg" alt="Slika 5">
+        </a>
+
+       
+           
+    </div>
+</div>
+<div style="height: 30px;"></div>
+
+    </main>
+    <h4 class="centered-text" style="color: #008080; font-style: italic; font-size: 40px; text-align: center; font-weight: bold; ">PRONADJITE NAS</h4>
+
+
+    <div style="height: 20px;"></div>
+
+          <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.045584715244!2d-122.41941548469014!3d37.77492957960228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807a75766e8b%3A0x88af268b61d9b75a!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1610029563941!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <footer>
+          <img src="zeleni_logo1.jpg" alt="Opis slike" width="180" height="70" style="border: 2px solid #ff7f50; border-radius: 5px;">
+<div style="height: 30px;"></div>
+    <h4>MARIN-MED-MNE</h4>
+    <p>info@marin-med-mne.com</p>
+    <p>+38267417417</p>
+    <p style="color: #000000;">© 2025 cryptogorac.com</p>
+
+
+</footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // ... (postojeći JavaScript kod) ...
+        document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.getElementById('backToTop');
+
+    // Prikaz dugmeta kada se skroluje dole
+    window.onscroll = function() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style.display = "block";
+        } else {
+            backToTopButton.style.display = "none";
+        }
+    };
+
+    // Funkcionalnost dugmeta za povratak na vrh
+    backToTopButton.addEventListener('click', function() {
+        document.body.scrollTop = 0; // Za Safari
+        document.documentElement.scrollTop = 0; // Za Chrome, Firefox, IE i Opera
+    });
+});
+        document.addEventListener('DOMContentLoaded', function() {
+    const ticker = document.querySelector('.ticker-content');
+    const clone = ticker.cloneNode(true); // kloniranje sadržaja
+    ticker.appendChild(clone); // dodavanje klona za beskonačnu animaciju
+});
+        document.addEventListener('DOMContentLoaded', function() {
+    var touchStartEvent = 'touchstart';
+    var touchEndEvent = 'touchend';
+
+    function addHoverClass(el) {
+        el.classList.add('hover');
+    }
+
+    function removeHoverClass(el) {
+        el.classList.remove('hover');
+    }
+
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(function(el) {
+        el.addEventListener(touchStartEvent, function(e) {
+            // Dodajemo hover klasu bez sprecavanja podrazumevanog ponašanja
+            addHoverClass(this);
+        });
+
+        el.addEventListener(touchEndEvent, function() {
+            removeHoverClass(this);
+            // Ovde mozemo dodati mali zadrzaj ako zelimo da efekat traje malo duze
+            setTimeout(function() {
+                removeHoverClass(this);
+            }.bind(this), 300); // 200ms delay
+        });
+    });
+});
+    </script>
+</body>
+</html>

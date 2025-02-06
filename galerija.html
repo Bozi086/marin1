@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marin-med-mne.com - Galerija</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            padding: 2em;
+            flex: 1;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5em;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .caption,
+        .gallery-item.hover .caption {
+            opacity: 1;
+        }
+
+        .centered-text {
+            text-align: center;
+            color:#008080;
+            
+        }
+
+
+        /* Opcije navigacionog bara */
+        nav .navbar-nav .nav-item {
+            position: relative;
+        }
+
+        nav .navbar-nav .nav-item .dropdown-menu {
+            background-color: #008080; /* ZELENA boja */
+        }
+
+        nav .navbar-nav .nav-item .dropdown-menu a {
+            color: white; /* Beli tekst za stavke padajućeg menija */
+        }
+
+        nav .navbar-nav .nav-item:hover > a,
+        nav .navbar-nav .nav-item .dropdown-menu a:hover {
+            background-color: #ff7f50;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.5s ease-in-out, background-color 0.5s ease-in-out;
+        }
+
+        /* Prilagođeni stilovi navigacionog bara */
+        .navbar {
+            background-color: #008080; /* ZELENA boja */
+        }
+
+        .navbar .navbar-nav .nav-link {
+            color: white !important; /* Beli tekst za stavke navigacije */
+            padding: 0.5rem 1rem; /* Dodatni prostor za bolje ciljanje na mobilnim uređajima */
+            border-radius: 10px; /* Zaobljene ivice */
+            margin: 0 5px; /* Razmak između stavki navigacije */
+        }
+
+        .navbar .navbar-nav .nav-link:hover,
+        .navbar .navbar-nav .nav-link:focus,
+        .navbar .navbar-nav .nav-link.hover {
+            background-color: #ff7f50;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar .navbar-brand {
+            color: white !important; /* Beli tekst za naziv brenda */
+        }
+
+        @media (hover: none) {
+            /* Stilovi koji se primenjuju kada hover nije podržan */
+            .navbar .navbar-nav .nav-link:hover {
+                /* Hover efekti nisu podržani na touch uređajima */
+            }
+            
+            .navbar .navbar-nav .nav-link:active {
+                /* Stilovi za aktivno stanje na mobilnim uređajima */
+                background-color: #ff7f50;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s;
+            }
+        }
+
+        .modal-img {
+            max-height: 80vh;
+            max-width: 100%;
+            display: block;
+            margin: auto;
+            object-fit: contain;
+        }
+
+        .row {
+            margin-right: -15px; /* Default Bootstrap margin */
+            margin-left: -15px;  /* Default Bootstrap margin */
+        }
+        .row > .col-md-4 {
+            padding-left: 15px; /* Default Bootstrap padding */
+            padding-right: 15px; /* Default Bootstrap padding */
+        }
+        .gallery-item {
+            margin-bottom: 20px; /* Dodatni razmak između redova */
+        }
+
+        #backToTop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: 2px solid #ff7f50; /* Narandžasti okvir */
+    outline: none;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px; /* Zakrivljene ivice */
+    width: 50px;
+    height: 50px;
+    line-height: 20px;
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.4s;
+}
+
+#backToTop:hover {
+    opacity: 1;
+}
+
+        footer {
+            background-color: #008080;
+            color: white;
+            text-align: center;
+            padding: 5.5em 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="zeleni_logo1.jpg" alt="Marin Med Montenegro" class="d-inline-block align-top" style="max-height: 69px; border: 2px solid #ff7f50; border-radius: 5px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Početna</a></li>
+                    <li class="nav-item"><a class="nav-link" href="o nama.html">O nama</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="webDevelopmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Usluge
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="webDevelopmentDropdown">
+                            <li><a class="dropdown-item" href="opsta medicina.html">Opsta Medicina</a></li>
+                            <li><a class="dropdown-item" href="hirurgija.html">Hirurgija</a></li>
+                            <li><a class="dropdown-item" href="specijalisticki pregledi.html">Specijalisticki pregledi</a></li>
+                            <li><a class="dropdown-item" href="ginekologija.html">Ginekologija</a></li>
+                            <li><a class="dropdown-item" href="njega i pomoc.html">Njega i pomoc</a></li>
+                            <li><a class="dropdown-item" href="neurologija.html">Neurologija</a></li>
+                            <li><a class="dropdown-item" href="pedijatrija.html">Pedijatrija</a></li>
+                            <li><a class="dropdown-item" href="dijagnostika.html">Dijagnostika</a></li>
+                            <li><a class="dropdown-item" href="infektologija i alergologija.html">Infektologija i Alergologija</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="galerija.html">Galerija</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontakti.html">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <button id="backToTop" title="Back to Top">^</button>
+
+    <main>
+        <div class="gallery-container">
+            <h2 class="centered-text mb-4"><b>Galerija</b></h2>
+            <div class="row">
+
+                 <div class="col-md-4 gallery-item">
+                    <img src="bolnica_ko.jpg" alt="Apartman lux" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="bolnica_ko.jpg" data-caption="Apartman lux">
+                    <div class="caption">Bolnica Kotor</div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="Hitan prijem 3.jpg" alt="Hitan prijem 3" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="Hitan prijem 3.jpg" data-caption="Hitan prijem 3">
+                    <div class="caption">Hitan prijem </div>
+                </div>
+
+                <div class="col-md-4 gallery-item">
+                    <img src="operacijona-sala.jpg" alt="Operaciona sala" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="operacijona-sala.jpg" data-caption="Operaciona sala">
+                    <div class="caption">Operaciona sala</div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="Kancelarija - recepcija.jpg" alt="Kancelarija recepcija" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="Kancelarija - recepcija.jpg" data-caption="Kancelarija recepcija">
+                    <div class="caption"> Recepcija</div>
+                </div>
+               
+                 
+               
+                <div class="col-md-4 gallery-item">
+                    <img src="Hitan prijem 1.jpg" alt="Hitan prijem 1" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="Hitan prijem 1.jpg" data-caption="Hitan prijem 1">
+                    <div class="caption">Hitan prijem </div>
+                </div>
+                
+                <div class="col-md-4 gallery-item">
+                    <img src="kotr operaciona.jpg" alt="Kotr operaciona" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="kotr operaciona.jpg" data-caption="Kotr operaciona">
+                    <div class="caption">Kotor operaciona</div>
+
+                </div>
+
+                <div class="col-md-4 gallery-item">
+                    <img src="MMed (3).jpg" alt="MMed 3" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="MMed (3).jpg" data-caption="Marin Med MNE">
+                    <div class="caption">Marin Med MNE</div>
+                </div>
+                
+                <div class="col-md-4 gallery-item">
+                    <img src="Aparatman 1.jpg" alt="Aparatman 1" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="Aparatman 1.jpg" data-caption="Aparatman 1">
+                    <div class="caption">Aparatman </div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="kotor.jpg" alt="Fascikla MMM" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="kotor.jpg" data-caption="Kotor">
+                    <div class="caption">Grad Kotor</div>
+                </div>
+                 
+                
+                
+                <div class="col-md-4 gallery-item">
+                    <img src="Dvoriste.jpg" alt="Dvorište" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="Dvoriste.jpg" data-caption="Dvorište">
+                    <div class="caption">Dvorište</div>
+                </div>
+                 <div class="col-md-4 gallery-item">
+                    <img src="slika1.jpg" alt="Mapa Marin Med" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="slika1.jpg" data-caption="Mapa Marin Med">
+                    <div class="caption"> Marin Med MNE</div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="ambulanta.jpg" alt="aklnwfMB" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="ambulanta.jpg" data-caption="ambulanta">
+                    <div class="caption">Ambulanta</div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="ap 2.jpg" alt="Ap 2" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="ap 2.jpg" data-caption="Ap 2">
+                    <div class="caption">Apartman</div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="bolnica-meljine.jpg" alt="panorama" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="bolnica-meljine.jpg" data-caption="panorama">
+                    <div class="caption">Panoramski pogled</div>
+                </div>
+               
+                <div class="col-md-4 gallery-item">
+                    <img src="mapa-marin-med.jpg" alt="Slika 1" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="mapa-marin-med.jpg" data-caption="Marin-Med Dubrovnik& Marin-Med-Mne">
+                    <div class="caption">Slika 1</div>
+                </div>
+               
+                <div class="col-md-4 gallery-item">
+                    <img src="frontal.jpg" alt=" MMM" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="frontal.jpg" data-caption="marin med Montenegro">
+                    <div class="caption">Marin Med </div>
+                </div>
+                <div class="col-md-4 gallery-item">
+                    <img src="hitna_ko.jpg" alt="Fascikla MMM" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="hitna_ko.jpg" data-caption="Hitna sluzba">
+                    <div class="caption">Hitna</div>
+                </div>
+                  <div class="col-md-4 gallery-item">
+                    <img src="poliklinika_ko.jpg" alt="poliklinika MMM" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="poliklinika_ko.jpg" data-caption="Poliklinika MMM">
+                    <div class="caption">Tim kolega DU </div>
+                </div>
+                     <div class="col-md-4 gallery-item">
+                    <img src="flajer mmm.jpg" alt="Operaciona sala" data-bs-toggle="modal" data-bs-target="#imageModal" data-image="flajer mmm.jpg" data-caption="Flajer MMM">
+                    <div class="caption">flajer MMM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model za prikaz slike -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="imageModalLabel">Opis slike</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img id="modalImage" class="modal-img" src="" alt="Slika">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <img src="zeleni_logo1.jpg" alt="Opis slike" width="180" height="70" style="border: 2px solid #ff7f50; border-radius: 5px;">
+        <div style="height: 30px;"></div>
+        <h4>MARIN-MED-MNE</h4>
+        <p>info@marin-med-mne.com</p>
+        <p>+38267417417</p>
+        <p style="color: #000000;">© 2025 cryptogorac.com</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+
+            // Prikaz dugmeta kada se skroluje dole
+            window.onscroll = function() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            };
+
+            // Funkcionalnost dugmeta za povratak na vrh
+            backToTopButton.addEventListener('click', function() {
+                document.body.scrollTop = 0; // Za Safari
+                document.documentElement.scrollTop = 0; // Za Chrome, Firefox, IE i Opera
+            });
+
+            // Hover efekat za mobilne uređaje
+            var touchStartEvent = 'touchstart';
+            var touchEndEvent = 'touchend';
+
+            function addHoverClass(el) {
+                el.classList.add('hover');
+            }
+
+            function removeHoverClass(el) {
+                el.classList.remove('hover');
+            }
+
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(function(el) {
+                el.addEventListener(touchStartEvent, function(e) {
+                    addHoverClass(this);
+                });
+
+                el.addEventListener(touchEndEvent, function() {
+                    setTimeout(function() {
+                        removeHoverClass(this);
+                    }.bind(this), 500); // 500ms delay
+                });
+            });
+
+            // Prikaži modal
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    let modal = document.getElementById('imageModal');
+                    let modalImage = document.getElementById('modalImage');
+                    let modalTitle = document.querySelector('#imageModalLabel');
+                    
+                    modalImage.src = e.target.getAttribute('data-image');
+                    modalImage.alt = e.target.alt;
+                    modalTitle.textContent = e.target.getAttribute('data-caption');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
