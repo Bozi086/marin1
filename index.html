@@ -68,8 +68,11 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
 @media (hover: none) {
     /* Stilovi koji se primenjuju kada hover nije podržan */
     .navbar .navbar-nav .nav-link:hover {
-        /* Hover efekti nisu podržani na touch uređajima */
-    }
+      .navbar .navbar-nav .nav-link:hover {
+          background-color: #ff7f50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
+}
     
     .navbar .navbar-nav .nav-link:active {
         /* Stilovi za aktivno stanje na mobilnim uređajima */
