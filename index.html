@@ -18,7 +18,7 @@
         }
         
 
-/* Stilovi za navigacioni bar */
+/* navigacionog bara */
 nav .navbar-nav .nav-item {
     position: relative;
 }
@@ -63,9 +63,12 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
     color: white !important; /* Beli tekst za naziv brenda */
 }
 
+
+
 @media (hover: none) {
     /* Stilovi koji se primenjuju kada hover nije podržan */
     .navbar .navbar-nav .nav-link:hover {
+        
         /* Hover efekti nisu podržani na touch uređajima */
     }
     
@@ -73,18 +76,17 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
         /* Stilovi za aktivno stanje na mobilnim uređajima */
         background-color: #ff7f50;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        transition: all 0.4s ease-in-out;
+       transition: all 0.4s 
     }
 }
 
-.thin-line {
+       .thin-line {
     width: 100%;        /* Linija prelazi preko cijele širine roditeljskog elementa */
     height: 2px;        /* Debljina linije */
     background-color: #008080; /* Zelena boja */
     margin: 0;          /* Bez margina */
     border: none;       /* Bez ivice */
 }
-
 
        
 
@@ -895,7 +897,7 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
                 </div>
 
     <footer>
-              <a class="footer"href="index.html">
+            <a class="footer"href="index.html">
         <img src="zeleni_logo1.jpg" alt="Opis slike" width="180" height="70" style="border: 2px solid #ff7f50; border-radius: 5px;">
     </a>
 <div style="height: 30px;"></div>
@@ -935,7 +937,7 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
     const clone = ticker.cloneNode(true); // kloniranje sadržaja
     ticker.appendChild(clone); // dodavanje klona za beskonačnu animaciju
 });
-     document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
     var touchStartEvent = 'touchstart';
     var touchEndEvent = 'touchend';
 
@@ -949,17 +951,19 @@ nav .navbar-nav .nav-item .dropdown-menu a:hover {
 
     document.querySelectorAll('.navbar-nav .nav-link').forEach(function(el) {
         el.addEventListener(touchStartEvent, function(e) {
+            // Dodajemo hover klasu bez sprecavanja podrazumevanog ponašanja
             addHoverClass(this);
         });
 
         el.addEventListener(touchEndEvent, function() {
+            removeHoverClass(this);
+            // Ovde mozemo dodati mali zadrzaj ako zelimo da efekat traje malo duze
             setTimeout(function() {
                 removeHoverClass(this);
-            }.bind(this), 300); // 300ms delay
+            }.bind(this), 300); // 200ms delay
         });
     });
 });
-
     </script>
 </body>
 </html>
