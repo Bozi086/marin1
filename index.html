@@ -118,13 +118,13 @@ background-color: rgba(0, 128, 128, 0.45);
     height: 100%;
     opacity: 0;
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Prelaženje između slika */
-    transform: scale(0.85); /* Smanjenje slike za efekat */
+    transform: scale(0.8); /* Smanjenje slike za efekat */
     backface-visibility: hidden; /* Da spriječimo čudne efekte pri animaciji */
 }
 
 .carousel-item.active {
     opacity: 1;
-    transform: scale(0.85); /* Smanjenje slike za 10% uz aktivaciju */
+    transform: scale(0.80); /* Smanjenje slike za 10% uz aktivaciju */
     z-index: 2; /* Da se aktivna slika prikaže ispred drugih */
 }
 
@@ -156,7 +156,7 @@ background-color: rgba(0, 128, 128, 0.45);
 /* Prilagodba za mobilne uređaje */
 @media (max-width: 768px) {
     .carousel-container {
-        height: 300px; /* Manja visina za mobilne uređaje */
+        height: 280px; /* Manja visina za mobilne uređaje */
     }
     
     .carousel-item img {
@@ -172,7 +172,7 @@ background-color: rgba(0, 128, 128, 0.45);
 /* Prilagodba za mobilne uređaje */
 @media (max-width: 768px) {
     .carousel-container {
-        height: 265px; /* Manja visina za mobilne uređaje */
+        height: 280px; /* Manja visina za mobilne uređaje */
     }
     
     .carousel-item img {
